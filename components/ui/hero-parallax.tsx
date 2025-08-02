@@ -51,7 +51,7 @@ export const HeroParallax = ({
     springConfig
   );
   const translateY = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [-700, 500]),
+    useTransform(scrollYProgress, [0, 0.2], [-200, 100]),
     springConfig
   );
   return (
@@ -104,13 +104,18 @@ export const HeroParallax = ({
 export const Header = () => {
   return (
     <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full left-0 top-0">
-      <h1 className="text-2xl md:text-7xl font-bold text-slate-900 dark:text-white">
-        VIIT Visakhapatnam <br /> Excellence in Education
-      </h1>
-      <p className="max-w-2xl text-base md:text-xl mt-8 text-slate-600 dark:text-neutral-200">
-        Discover our world-class departments, cutting-edge facilities, and vibrant campus life.
-        We are committed to nurturing future leaders through innovative education and research.
-      </p>
+      <div className="relative bg-gradient-to-br from-blue-50/90 to-white/90 dark:from-slate-900/90 dark:to-slate-800/90 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-blue-100/50 dark:border-slate-700/50 shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-3xl"></div>
+        <div className="relative z-10">
+          <h1 className="text-2xl md:text-7xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            VIIT Visakhapatnam <br /> Excellence in Education
+          </h1>
+          <p className="max-w-2xl text-base md:text-xl mt-8 text-slate-700 dark:text-neutral-300 leading-relaxed">
+            Discover our world-class departments, cutting-edge facilities, and vibrant campus life.
+            We are committed to nurturing future leaders through innovative education and research.
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

@@ -88,7 +88,43 @@ body {
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 2rem;
+  }
   body {
     @apply bg-background text-foreground;
+  }
+  
+  /* Enhanced smooth scrolling for all scroll containers */
+  * {
+    scroll-behavior: smooth;
+  }
+  
+  /* Smooth scrolling for custom scroll containers */
+  [data-scroll-container] {
+    scroll-behavior: smooth;
+  }
+  
+  /* Additional smooth scrolling optimizations */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    * {
+      scroll-behavior: smooth;
+    }
+  }
+  
+  /* Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    
+    * {
+      scroll-behavior: auto;
+    }
   }
 }
