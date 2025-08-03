@@ -1,53 +1,52 @@
 import React from 'react'
+import Image from 'next/image'
+
+const recruiters = [
+  { name: 'Accenture', logo: 'data:image/png;base64,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', width: 140, height: 40 },
+  { name: 'Amazon', logo: 'data:image/png;base64,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', width: 110, height: 40 },
+  { name: 'Meesho', logo: 'https://trackingstatus.in/wp-content/uploads/2024/03/Meesho-Orders-Delivery-Tracking-Logo.webp', width: 120, height: 40 },
+  { name: 'Bajaj Finserv', logo: 'https://images.moneycontrol.com/static-mcnews/2019/12/Bajaj-Finserv-Logo.jpg?impolicy=website&width=1600&height=900', width: 150, height: 40 },
+  { name: 'InnCircles', logo: 'https://inncircles.com/_next/static/media/inncircles-logo.14930f20.webp', width: 140, height: 40 },
+  { name: 'TCS', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMDUVypWIMswUYK4qnmqnciqdXIw759HaQNg&s', width: 120, height: 40 },
+  { name: 'Wipro', logo: 'https://www.wipro.com/content/dam/wipro/social-icons/wipro_new_logo.svg', width: 120, height: 40 },
+  { name: 'Infosys', logo: 'https://www.drupal.org/files/infosys-logo-PNG.png', width: 120, height: 40 },
+  { name: 'Capgemini', logo: 'https://www.capgemini.com/wp-content/themes/capgemini2020/assets/images/logo.svg', width: 120, height: 40 },
+  { name: 'Cognizant', logo: 'https://www.cognizant.com/us/media_1808da395be9f77c0124de824530b0338915414a8.svg?width=2000&format=webply&optimize=medium', width: 120, height: 40 },
+  { name: 'HCL', logo: 'https://logos-world.net/wp-content/uploads/2022/07/HCL-Technologies-Symbol.png', width: 120, height: 80 },
+  { name: 'IBM', logo: 'data:image/png;base64,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', width: 120, height: 40 },
+  {name:'microsoft',logo:'https://uhf.microsoft.com/images/microsoft/RE1Mu3b.png',width:120,height:40},
+];
 
 const TopRecruiters = () => {
   return (
     <section className="py-16 px-4 sm:px-8 bg-white overflow-hidden">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl font-bold text-blue-800 mb-12 text-center">
+        <h2 className="text-4xl font-bold text-navy-text mb-12 text-center">
           Top Recruiters
         </h2>
 
-        <div className="relative w-full overflow-hidden">
+        <div
+          className="relative w-full overflow-hidden"
+          // Add a mask to fade the edges
+          style={{
+            maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+          }}
+        >
           <div className="animate-slide flex gap-16 items-center w-max">
             {[...Array(2)].map((_, idx) => (
               <React.Fragment key={idx}>
-                <div className="flex items-center justify-center h-16 min-w-[150px] group">
-                  <span className="text-2xl font-bold text-purple-600 transition duration-300 group-hover:scale-110 group-hover:text-purple-800 cursor-pointer">
-                    accenture
-                  </span>
-                </div>
-                <div className="flex items-center justify-center h-16 min-w-[150px] group">
-                  <span className="text-2xl font-bold text-blue-600 transition duration-300 group-hover:scale-110 group-hover:text-red-800 cursor-pointer">
-                    ALSTOM
-                  </span>
-                </div>
-                <div className="flex items-center justify-center h-16 min-w-[150px] group">
-                  <span className="text-2xl font-bold text-orange-500 transition duration-300 group-hover:scale-110 group-hover:text-orange-700 cursor-pointer">
-                    amazon
-                  </span>
-                </div>
-                <div className="flex items-center justify-center h-16 min-w-[150px] group">
-                  <span className="text-2xl font-bold text-blue-500 transition duration-300 group-hover:scale-110 group-hover:text-red-700 cursor-pointer">
-                    amdocs
-                  </span>
-                </div>
-                <div className="flex items-center justify-center h-16 min-w-[150px] group">
-                  <span className="text-2xl font-bold text-purple-600 transition duration-300 group-hover:scale-110 group-hover:text-dark-800 cursor-pointer">
-                    Meesho
-                  </span>
-                </div>
-                <div className="flex items-center justify-center h-16 min-w-[150px] group">
-                  <span className="text-2xl font-bold text-blue-600 transition duration-300 group-hover:scale-110 group-hover:text-blue-800 cursor-pointer">
-                    BAJAJ FINSERV
-                  </span>
-                </div>
-                <div className="flex items-center justify-center h-16 min-w-[150px] group">
-                  <span className="text-2xl font-bold text-secondary-600 transition duration-300 group-hover:scale-110 group-hover:text-dark-800 cursor-pointer">
-                    InnCircles
-                  </span>
-                </div>
-                
+                {recruiters.map((recruiter) => (
+                  <div key={recruiter.name} className="flex items-center justify-center h-16 min-w-[150px]">
+                    <Image
+                      src={recruiter.logo}
+                      alt={`${recruiter.name} logo`}
+                      width={recruiter.width}
+                      height={recruiter.height}
+                      className="object-contain h-10 w-auto transition-all duration-300 hover:scale-110"
+                    />
+                  </div>
+                ))}
               </React.Fragment>
             ))}
           </div>
@@ -57,7 +56,7 @@ const TopRecruiters = () => {
           <blockquote className="text-2xl font-light italic mb-4">
             " India envisions tomorrow — VIIT shapes it today. "
           </blockquote>
-          <cite className="text-lg">- Dr. Lavu. Rathaiah , Chancellor & Chairman , VIIT</cite>
+          <cite className="text-lg">- Dr. Lavu. Rathaiah, Chancellor & Chairman, VIIT</cite>
         </div>
       </div>
     </section>
